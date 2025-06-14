@@ -33,6 +33,19 @@ const sanitizeInput = (input: string): string => {
   return input.trim().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 };
 
+const extractClientIP = (forwardedFor: string | null): string => {
+  if (!forwardedFor) return "unknown";
+  
+  // x-forwarded-for can contain multiple IPs: "client, proxy1, proxy2"
+  // We want the first (original client) IP
+  const firstIP = forwardedFor.split(',')[0].trim();
+  
+  // Validate that it's a proper IP format (basic validation)
+  const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+  
+  return ipRegex.test(firstIP) ? firstIP : "unknown";
+};
+
 const checkRateLimit = (ip: string): boolean => {
   const now = Date.now();
   const limit = rateLimitStore.get(ip);
@@ -67,8 +80,10 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Get client IP for rate limiting
-    const clientIP = req.headers.get("x-forwarded-for") || "unknown";
+    // Get client IP for rate limiting - fix the multiple IP issue
+    const forwardedFor = req.headers.get("x-forwarded-for");
+    const clientIP = extractClientIP(forwardedFor);
+    console.log("Client IP extracted:", clientIP, "from header:", forwardedFor);
     
     // Check rate limit
     if (!checkRateLimit(clientIP)) {
@@ -124,9 +139,11 @@ const handler = async (req: Request): Promise<Response> => {
       phone: formData.phone ? sanitizeInput(formData.phone) : null,
       service_required: formData.serviceRequired,
       project_details: sanitizeInput(formData.projectDetails),
-      ip_address: clientIP,
+      ip_address: clientIP === "unknown" ? null : clientIP,
       user_agent: req.headers.get("user-agent") || null,
     };
+
+    console.log("Attempting to insert data:", sanitizedData);
 
     // Insert into database
     const { data, error } = await supabase
