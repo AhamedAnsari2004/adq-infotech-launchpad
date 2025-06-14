@@ -17,7 +17,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/0a704aa7-19eb-45f5-8742-02af7c0236ea.png" 
                 alt="ADQ INFOTECH" 
-                className="h-16 w-auto brightness-0 invert"
+                className="h-16 w-auto"
               />
             </div>
             <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
