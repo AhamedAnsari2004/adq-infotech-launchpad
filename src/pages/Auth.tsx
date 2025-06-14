@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,17 +8,55 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/components/ui/use-toast';
-import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft, CheckCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [signInData, setSignInData] = useState({ email: '', password: '' });
   const [signUpData, setSignUpData] = useState({ email: '', password: '', fullName: '' });
+  const [emailSent, setEmailSent] = useState(false);
   
   const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Handle email confirmation from URL
+  useEffect(() => {
+    const handleEmailConfirmation = async () => {
+      const token = searchParams.get('token');
+      const type = searchParams.get('type');
+      
+      if (token && type === 'signup') {
+        console.log('Processing email confirmation token');
+        const { data, error } = await supabase.auth.verifyOtp({
+          token_hash: token,
+          type: 'signup'
+        });
+        
+        if (error) {
+          console.error('Email confirmation error:', error);
+          toast({
+            title: "Email Confirmation Failed",
+            description: error.message,
+            variant: "destructive"
+          });
+        } else {
+          console.log('Email confirmed successfully:', data);
+          toast({
+            title: "Email Confirmed!",
+            description: "Your email has been confirmed successfully. You can now sign in."
+          });
+          // Clear the URL parameters
+          navigate('/auth', { replace: true });
+        }
+      }
+    };
+
+    handleEmailConfirmation();
+  }, [searchParams, navigate, toast]);
 
   // Redirect authenticated users to home page
   useEffect(() => {
@@ -31,7 +69,7 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const { error } = await signIn(signInData.email, signInData.password);
+    const { data, error } = await signIn(signInData.email, signInData.password);
     
     if (error) {
       toast({
@@ -53,7 +91,7 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const { error } = await signUp(signUpData.email, signUpData.password, signUpData.fullName);
+    const { data, error } = await signUp(signUpData.email, signUpData.password, signUpData.fullName);
     
     if (error) {
       toast({
@@ -62,6 +100,8 @@ const Auth = () => {
         variant: "destructive"
       });
     } else {
+      console.log('Sign up successful, user needs to confirm email:', data);
+      setEmailSent(true);
       toast({
         title: "Check your email!",
         description: "We've sent you a confirmation link to complete your registration."
@@ -70,6 +110,39 @@ const Auth = () => {
     
     setIsLoading(false);
   };
+
+  if (emailSent) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader className="text-center">
+            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <CardTitle className="text-2xl font-bold">Check Your Email</CardTitle>
+            <CardDescription>
+              We've sent a confirmation link to {signUpData.email}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-gray-600 mb-4">
+              Click the link in your email to confirm your account and complete the registration process.
+            </p>
+            <p className="text-sm text-gray-500">
+              Don't see the email? Check your spam folder or try signing up again.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button 
+              variant="outline" 
+              onClick={() => setEmailSent(false)}
+              className="w-full"
+            >
+              Back to Sign Up
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">

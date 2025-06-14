@@ -11,11 +11,16 @@ export const useAuth = () => {
   useEffect(() => {
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Handle email confirmation
+        if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
+          console.log('User email confirmed successfully');
+        }
       }
     );
 
@@ -30,9 +35,12 @@ export const useAuth = () => {
   }, []);
 
   const signUp = async (email: string, password: string, fullName?: string) => {
-    const redirectUrl = `${window.location.origin}/`;
+    // Use the current app URL for redirect
+    const redirectUrl = window.location.origin;
     
-    const { error } = await supabase.auth.signUp({
+    console.log('Signing up with redirect URL:', redirectUrl);
+    
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -42,15 +50,19 @@ export const useAuth = () => {
         }
       }
     });
-    return { error };
+    
+    console.log('Sign up response:', { data, error });
+    return { data, error };
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
-    return { error };
+    
+    console.log('Sign in response:', { data, error });
+    return { data, error };
   };
 
   const signOut = async () => {
