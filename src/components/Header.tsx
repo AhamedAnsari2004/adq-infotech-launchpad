@@ -2,6 +2,7 @@
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import AuthButtons from './AuthButtons';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,14 +28,9 @@ const Header = () => {
             <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <a 
-              href="#contact" 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              Get Started
-            </a>
+          {/* Auth Buttons - Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            <AuthButtons />
           </div>
 
           {/* Mobile Menu Button */}
@@ -54,12 +50,11 @@ const Header = () => {
               <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Services</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
-              <a 
-                href="#contact" 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-center hover:shadow-lg transition-all duration-300"
-              >
-                Get Started
-              </a>
+              
+              {/* Auth Buttons - Mobile */}
+              <div className="pt-2">
+                <AuthButtons />
+              </div>
             </div>
           </nav>
         )}
