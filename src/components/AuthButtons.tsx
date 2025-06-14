@@ -1,31 +1,52 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { LogIn, LogOut, User } from 'lucide-react';
 import { Button } from './ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from './ui/use-toast';
 
 const AuthButtons = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState<{ name: string } | null>(null);
+  const { user, signOut, loading } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Sign Out Error",
+        description: error.message,
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Signed out successfully",
+        description: "You have been signed out."
+      });
+    }
+  };
 
   const handleSignIn = () => {
-    // This is a placeholder - you'll replace this with your actual authentication logic
-    setIsSignedIn(true);
-    setUser({ name: 'User' });
-    console.log('Sign in clicked - integrate with your auth service');
+    navigate('/auth');
   };
 
-  const handleSignOut = () => {
-    setIsSignedIn(false);
-    setUser(null);
-    console.log('Sign out clicked');
-  };
+  if (loading) {
+    return (
+      <div className="flex items-center space-x-2">
+        <div className="animate-pulse bg-gray-200 h-8 w-20 rounded"></div>
+      </div>
+    );
+  }
 
-  if (isSignedIn && user) {
+  if (user) {
     return (
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-2 text-gray-700">
           <User size={20} />
-          <span className="hidden sm:inline">Welcome, {user.name}</span>
+          <span className="hidden sm:inline">
+            Welcome, {user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'}
+          </span>
         </div>
         <Button
           onClick={handleSignOut}
