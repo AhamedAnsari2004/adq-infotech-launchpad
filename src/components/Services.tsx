@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Code, Palette, Smartphone, ArrowRight } from 'lucide-react';
+import { Code, Palette, Smartphone, ArrowRight, Palette as LogoIcon } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -24,6 +24,13 @@ const Services = () => {
       description: "Intuitive user interfaces and seamless user experiences that delight your audience. We focus on user research, prototyping, and testing to ensure optimal usability.",
       features: ["User Research", "Wireframing", "Prototyping", "Usability Testing", "Design Systems"],
       color: "indigo"
+    },
+    {
+      icon: LogoIcon,
+      title: "Logo Designing",
+      description: "Memorable and impactful logos that represent your brand's unique identity. We create distinctive visual marks that communicate your values and make lasting impressions.",
+      features: ["Brand Strategy", "Logo Concepts", "Typography Design", "Icon Creation", "Brand Guidelines"],
+      color: "emerald"
     }
   ];
 
@@ -49,6 +56,13 @@ const Services = () => {
         iconBg: "bg-indigo-100",
         button: "from-indigo-600 to-indigo-700",
         border: "border-indigo-200"
+      },
+      emerald: {
+        bg: "bg-emerald-50",
+        icon: "text-emerald-600",
+        iconBg: "bg-emerald-100",
+        button: "from-emerald-600 to-emerald-700",
+        border: "border-emerald-200"
       }
     };
     return colorMap[color as keyof typeof colorMap];
@@ -69,7 +83,7 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => {
             const colors = getColorClasses(service.color);
             const Icon = service.icon;
