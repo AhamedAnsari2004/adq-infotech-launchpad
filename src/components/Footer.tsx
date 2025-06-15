@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 
@@ -80,6 +81,7 @@ const Footer = () => {
               <li className="text-gray-300">Web Development</li>
               <li className="text-gray-300">Web Designing</li>
               <li className="text-gray-300">UI/UX Designing</li>
+              <li className="text-gray-300">Logo Designing</li>
               <li className="text-gray-300">Free Consultation</li>
             </ul>
           </div>

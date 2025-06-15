@@ -121,7 +121,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Validate service required
-    const validServices = ['web-development', 'web-design', 'ui-ux', 'consultation'];
+    const validServices = ['web-development', 'web-design', 'ui-ux', 'logo-design', 'consultation'];
     if (!validServices.includes(formData.serviceRequired)) {
       return new Response(
         JSON.stringify({ error: "Invalid service selection" }),
