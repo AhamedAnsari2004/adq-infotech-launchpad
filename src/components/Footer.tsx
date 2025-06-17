@@ -86,26 +86,6 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-
-        {/* Newsletter Section */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-semibold mb-4">Stay Updated</h3>
-            <p className="text-gray-300 mb-6">
-              Subscribe to our newsletter for the latest updates on web development trends and our services.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Footer */}
