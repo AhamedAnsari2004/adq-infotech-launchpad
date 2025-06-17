@@ -87,12 +87,6 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, service })
             </div>
           </div>
 
-          {/* Pricing */}
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Investment</h3>
-            <p className="text-gray-600 text-lg">{service.detailedInfo.pricing}</p>
-          </div>
-
           {/* CTA */}
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl text-center">
             <h4 className="text-xl font-semibold text-gray-900 mb-2">Ready to Get Started?</h4>
