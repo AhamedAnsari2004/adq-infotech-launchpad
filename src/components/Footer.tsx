@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp, Instagram, Facebook } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = () =>  {
@@ -44,6 +44,26 @@ const Footer = () => {
                   +91 9787117544
                 </a>
               </div>
+            </div>
+            
+            {/* Social Media Icons */}
+            <div className="flex items-center space-x-4 mt-6">
+              <a 
+                href="https://www.instagram.com/adqinfotech?igsh=MTdpeXJxMGV0bTdydA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://www.facebook.com/share/1ATGkHkFYK/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 p-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
