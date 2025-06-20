@@ -164,6 +164,28 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Contact form submitted successfully:", data);
 
+    // Send email notification in the background
+    if (data && data[0]) {
+      const submissionId = data[0].id;
+      console.log("Sending email notification for submission:", submissionId);
+      
+      // Trigger email notification (fire and forget)
+      supabase.functions.invoke('send-contact-notification', {
+        body: {
+          ...formData,
+          submissionId: submissionId
+        }
+      }).then((emailResult) => {
+        if (emailResult.error) {
+          console.error("Email notification error:", emailResult.error);
+        } else {
+          console.log("Email notification triggered successfully");
+        }
+      }).catch((emailError) => {
+        console.error("Failed to trigger email notification:", emailError);
+      });
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true, 
