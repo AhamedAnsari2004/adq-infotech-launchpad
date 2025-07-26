@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/lovable-uploads/0a704aa7-19eb-45f5-8742-02af7c0236ea.png" 
+                src="/lovable-uploads/d1ff1f98-774c-43f5-85f8-5c325f42a655.png" 
                 alt="ADQ INFOTECH" 
                 className="h-16 w-auto"
               />
