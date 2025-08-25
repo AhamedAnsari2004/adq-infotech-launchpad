@@ -25,6 +25,7 @@ const Header = () => {
             <a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Home</a>
             <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Services</a>
             <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
+            <a href="#blog" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Blog</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
           </nav>
 
@@ -49,6 +50,7 @@ const Header = () => {
               <a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Home</a>
               <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Services</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
+              <a href="#blog" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Blog</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
               
               {/* Auth Buttons - Mobile */}
