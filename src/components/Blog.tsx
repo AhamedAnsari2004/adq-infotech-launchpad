@@ -39,24 +39,6 @@ The good news? Creating a professional website is now more affordable than ever.
 If you're a startup in 2025, not having a website means missing out on opportunities, customers, and growth. A website is more than just an online presence — it's your brand's foundation in the digital age.
 
 At ADQ Infotech, we specialize in helping startups and small businesses design, develop, and elevate their digital presence with creative, modern, and user-friendly websites.`
-    },
-    {
-      id: 2,
-      title: "The Future of Web Development: Trends to Watch in 2024",
-      excerpt: "Explore the latest trends shaping the web development landscape, from AI integration to progressive web apps.",
-      author: "ADQ INFOTECH Team",
-      date: "March 15, 2024",
-      image: "/lovable-uploads/9a921f90-c335-40c8-a042-9657da584de9.png",
-      category: "Technology"
-    },
-    {
-      id: 3,
-      title: "Building Scalable Cloud Infrastructure for Modern Businesses",
-      excerpt: "Learn how to design and implement cloud solutions that grow with your business needs.",
-      author: "ADQ INFOTECH Team",
-      date: "March 10, 2024",
-      image: "/lovable-uploads/96594e1b-e7f6-4533-86d6-7850093a4c95.png",
-      category: "Cloud Solutions"
     }
   ];
 
