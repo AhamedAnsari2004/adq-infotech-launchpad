@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Calendar, User, ArrowRight, X } from 'lucide-react';
 
 const Blog = () => {
+  const [selectedPost, setSelectedPost] = useState(null);
   const blogPosts = [
     {
       id: 1,
@@ -89,7 +91,8 @@ At ADQ Infotech, we specialize in helping startups and small businesses design, 
                     <User size={14} />
                     <span>{post.author}</span>
                   </div>
-                  <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                  <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform cursor-pointer"
+                       onClick={() => setSelectedPost(post)}>
                     Read More
                     <ArrowRight size={14} className="ml-1" />
                   </div>
@@ -105,6 +108,48 @@ At ADQ Infotech, we specialize in helping startups and small businesses design, 
             View All Posts
           </button>
         </div>
+
+        {/* Blog Post Modal */}
+        {selectedPost && (
+          <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
+            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <div className="flex items-center justify-between">
+                  <DialogTitle className="text-2xl font-bold pr-8">
+                    {selectedPost.title}
+                  </DialogTitle>
+                </div>
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground mt-4">
+                  <div className="flex items-center space-x-1">
+                    <Calendar size={14} />
+                    <span>{selectedPost.date}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <User size={14} />
+                    <span>{selectedPost.author}</span>
+                  </div>
+                  <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs">
+                    {selectedPost.category}
+                  </span>
+                </div>
+              </DialogHeader>
+              
+              <div className="mt-6">
+                <img 
+                  src={selectedPost.image} 
+                  alt={selectedPost.title}
+                  className="w-full h-64 object-cover rounded-lg mb-6"
+                />
+                
+                <div className="prose prose-lg max-w-none">
+                  <div className="whitespace-pre-line text-foreground leading-relaxed">
+                    {selectedPost.content}
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </section>
   );
