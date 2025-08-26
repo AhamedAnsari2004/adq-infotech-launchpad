@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { ExternalLink, Github, Calendar } from 'lucide-react';
 
 const Projects = () => {
-  const projects = [
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  
+  const mainProjects = [
     {
       id: 1,
       title: "APPRENTICE",
@@ -28,6 +30,55 @@ const Projects = () => {
       liveUrl: "https://applymat.lovable.app"
     }
   ];
+
+  const portfolioProjects = [
+    {
+      id: 3,
+      title: "Abdulrahman Portfolio",
+      description: "Personal portfolio website showcasing projects and skills with modern design and interactive elements",
+      image: "/placeholder.svg",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      category: "Portfolio",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://abdulrahman-portfolio.lovable.app"
+    },
+    {
+      id: 4,
+      title: "Abdulsalam Portfolio",
+      description: "Professional portfolio website featuring clean design and comprehensive project showcase",
+      image: "/placeholder.svg",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      category: "Portfolio",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://abdulsalam-portfolio.lovable.app"
+    },
+    {
+      id: 5,
+      title: "Ahamed Ansari Portfolio",
+      description: "Creative portfolio website with unique design elements and smooth animations",
+      image: "/placeholder.svg",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      category: "Portfolio",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://ahamedansari-portfolio.lovable.app"
+    },
+    {
+      id: 6,
+      title: "Althaf Hussain Portfolio",
+      description: "Modern portfolio website with responsive design and professional layout",
+      image: "/placeholder.svg",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      category: "Portfolio",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://althaffhussain-portfolio.lovable.app"
+    }
+  ];
+
+  const allProjects = showAllProjects ? [...mainProjects, ...portfolioProjects] : mainProjects;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -55,7 +106,7 @@ const Projects = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
-          {projects.map((project) => (
+          {allProjects.map((project) => (
             <Card key={project.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className="relative overflow-hidden">
                 <img 
@@ -118,8 +169,12 @@ const Projects = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="bg-primary hover:bg-primary/90">
-            View All Projects
+          <Button 
+            size="lg" 
+            className="bg-primary hover:bg-primary/90"
+            onClick={() => setShowAllProjects(!showAllProjects)}
+          >
+            {showAllProjects ? 'Show Less' : 'View All Projects'}
           </Button>
         </div>
       </div>
