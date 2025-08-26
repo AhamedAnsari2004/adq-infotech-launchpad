@@ -15,6 +15,17 @@ const Projects = () => {
       date: "2024",
       status: "Live",
       liveUrl: "https://apprentice.lovable.app"
+    },
+    {
+      id: 2,
+      title: "ApplyMate",
+      description: "AI-powered job application automation tool that helps job seekers streamline their application process with intelligent matching and automated submissions",
+      image: "/lovable-uploads/27b471c7-c842-4eb7-86fc-926e9aaf30e3.png",
+      technologies: ["React", "TypeScript", "AI/ML", "API Integration"],
+      category: "AI Platform",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://applymat.lovable.app"
     }
   ];
 
@@ -36,15 +47,14 @@ const Projects = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Our Project
+            Our Projects
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover our latest project that's helping professionals automate their LinkedIn presence and grow their network effectively.
+            Discover our latest projects that are helping professionals automate their workflows and enhance their productivity.
           </p>
         </div>
 
-        <div className="flex justify-center mb-12">
-          <div className="max-w-md w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
           {projects.map((project) => (
             <Card key={project.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className="relative overflow-hidden">
@@ -105,7 +115,6 @@ const Projects = () => {
               </CardContent>
             </Card>
           ))}
-          </div>
         </div>
 
         <div className="text-center">
