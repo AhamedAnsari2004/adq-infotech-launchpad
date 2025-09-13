@@ -28,12 +28,23 @@ const Projects = () => {
       date: "2024",
       status: "Live",
       liveUrl: "https://applymat.lovable.app"
+    },
+    {
+      id: 3,
+      title: "CloudNest",
+      description: "Cloud-based platform for seamless data management and collaboration with modern architecture and scalable infrastructure",
+      image: "/lovable-uploads/cloudnest-logo.png",
+      technologies: ["React", "TypeScript", "Cloud Services", "API Integration"],
+      category: "Cloud Platform",
+      date: "2024",
+      status: "Live",
+      liveUrl: "https://cloudnestt.lovable.app"
     }
   ];
 
   const portfolioProjects = [
     {
-      id: 3,
+      id: 4,
       title: "Abdulrahman Portfolio",
       description: "Personal portfolio website showcasing projects and skills with modern design and interactive elements",
       image: "/placeholder.svg",
@@ -44,7 +55,7 @@ const Projects = () => {
       liveUrl: "https://abdulrahman-portfolio.lovable.app"
     },
     {
-      id: 4,
+      id: 5,
       title: "Abdulsalam Portfolio",
       description: "Professional portfolio website featuring clean design and comprehensive project showcase",
       image: "/placeholder.svg",
@@ -55,7 +66,7 @@ const Projects = () => {
       liveUrl: "https://abdulsalam-portfolio.lovable.app"
     },
     {
-      id: 5,
+      id: 6,
       title: "Ahamed Ansari Portfolio",
       description: "Creative portfolio website with unique design elements and smooth animations",
       image: "/placeholder.svg",
@@ -66,7 +77,7 @@ const Projects = () => {
       liveUrl: "https://ahamedansari-portfolio.lovable.app"
     },
     {
-      id: 6,
+      id: 7,
       title: "Althaf Hussain Portfolio",
       description: "Modern portfolio website with responsive design and professional layout",
       image: "/placeholder.svg",
